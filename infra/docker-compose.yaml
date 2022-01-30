@@ -3,6 +3,7 @@ version: '3.8'
 services:
   db:
     image: postgres:13.0-alpine
+    # volume и связанная с ним директория в контейнере
     volumes:
       - /var/lib/postgresql/data/
     env_file:
@@ -11,6 +12,10 @@ services:
   web:
     image: tanjadocker/yamdb_image:latest
     restart: always
+    # указывает, из какой директории контейнера нужно переносить
+    # данные в volume — «внешнее хранилище данных»; таких хранилищ
+    # может быть несколько, поэтому здесь же указывается и в какое именно
+    # хранилище должны переноситься данные
     volumes:
       - static_value:/app/static/
       - media_value:/app/media/
