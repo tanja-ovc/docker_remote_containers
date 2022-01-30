@@ -23,7 +23,7 @@ class Command(BaseCommand):
 
     @staticmethod
     def get_csv_file(filename):
-        return os.path.join(settings.BASE_DIR, 'static', 'data', filename)
+        return os.path.join(settings.BASE_DIR, 'assets', 'data', filename)
 
     @staticmethod
     def clear_model(model):
