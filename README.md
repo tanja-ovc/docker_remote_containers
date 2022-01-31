@@ -5,7 +5,10 @@
 ### API
 
 API для платформы YaMDb. Version 1.
-Проект на данный момент развёрнут на сервере 51.250.12.20. Документация доступна по адресу http://51.250.12.20/redoc/.
+
+Проект на данный момент развёрнут на сервере 51.250.12.20.
+
+Документация доступна по адресу http://51.250.12.20/redoc/.
 
 ### Инфраструктура
 
@@ -21,46 +24,59 @@ API для платформы YaMDb. Version 1.
 - Добавьте в Secrets GitHub Actions вашего репозитория переменные окружения для работы базы данных:
 
   DOCKER_USERNAME - ваш юзернейм на Docker Hub
+
   DOCKER_PASSWORD - ваш пароль на Docker Hub
 
   HOST - IP вашего удалённого сервера
+
   USER - юзернейм для подключения к удалённому серверу
+
   SSH_KEY - private key компьютера, имеющего доступ по SSH к удалённому серверу (это нужно для того, чтобы ваш удалённый сервер опознал сервер GitHub Actions как тот, который имеет право на подключение)
 
+
   В случае, если ваш SSH-key создан с прилагающимся паролем, создайте также переменную PASSPHRASE, которая и будет содержать пароль, а в код файла _yamdb\_workflow.yml_ в ```deploy``` добавьте ```passphrase: ${{ secrets.PASSPHRASE }}``` таким образом:
-  ```deploy:```
-      ```runs-on: ubuntu-latest```
-      ```needs: build_and_push_to_docker_hub```
-      ```steps:```
-        ```- name: executing remote ssh commands to deploy```
-          ```uses: appleboy/ssh-action@master```
-          ```with:```
-            ```host: ${{ secrets.HOST }}```
-            ```sername: ${{ secrets.USER }}```
-            ```key: ${{ secrets.SSH_KEY }}```
-            ```passphrase: ${{ secrets.PASSPHRASE }}```
-            ```script: ...```
+          
+  ```
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build_and_push_to_docker_hub
+    steps:
+      - name: executing remote ssh commands to deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          script: ...
+  ```
 
   Значения для переменных окружения DB_ENGINE, DB_NAME, POSTGRES_USER, POSTGRES_PASSWORD, DB_HOST, DB_PORT возьмите из файла _infra/.env_
 
   TELEGRAM_TO - ваш ID в Telegram (узнать можно с помощью бота Userinfobot в Telegram: https://github.com/nadam/userinfobot)
+
   TELEGRAM_TOKEN - токен бота в Telegram, который будет отправлять вам сообщение об успешном осуществлении workflow (узнать можно с помощью бота BotFather в Telegram)
 
 Workflow будет запускаться при каждом пуше (git push) в ваш репозиторий: будут запускаться тесты и будет происходить обновление Docker образа с последующей его загрузкой на Docker Hub.
+
 В случае, если пуш будет происходить в ветку master, будет запускаться также деплой проекта на вашем удалённом сервере и осуществляться отправка сообщения об успешном осуществлении workflow вам в Telegram.
 
 После успешного деплоя выполните по очереди следующие команды внутри контейнера web:
 
 ```sudo docker-compose exec web python manage.py migrate```
+
 ```sudo docker-compose exec web python manage.py collectstatic```
 
 Если вы хотите создать суперпользователя, выполните
+
 ```sudo docker-compose exec web python manage.py createsuperuser```
 
 Документация проекта будет доступна по адресу http://<IP_вашего_сервера>/redoc/
+
 Админка: http://<IP_вашего_сервера>/admin/
 
 Заполнение БД прилагающимися данными в формате ```.csv``` можно произвести с помощью команды
+
 ```sudo docker-compose exec web python manage.py import_data```
 
 
