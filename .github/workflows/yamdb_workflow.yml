@@ -42,7 +42,7 @@ jobs:
         # uses: docker/build-push-action@v2
         run: |
           sudo docker pull tanjadocker/yamdb_image:latest
-          sudo docker build -t tanjadocker/yamdb_image:latest .
+          sudo docker build -t tanjadocker/yamdb_image:latest ./api_yamdb
           sudo docker push tanjadocker/yamdb_image:latest
         # with:
         #   context: ./api_yamdb
