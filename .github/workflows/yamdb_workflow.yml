@@ -39,17 +39,17 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Push to Docker Hub
-        # uses: docker/build-push-action@v2
-        working-directory: api_yamdb
-        run: |
-          sudo docker pull tanjadocker/yamdb_image:latest
-          sudo docker build -t tanjadocker/yamdb_image:latest .
-          sudo docker push tanjadocker/yamdb_image:latest
-        # with:
-        #   context: ./api_yamdb
-        #   no-cache: true
-        #   push: true
-        #   tags: tanjadocker/yamdb_image:latest
+        uses: docker/build-push-action@v2
+        # working-directory: api_yamdb
+        # run: |
+        #   sudo docker pull tanjadocker/yamdb_image:latest
+        #   sudo docker build -t tanjadocker/yamdb_image:latest .
+        #   sudo docker push tanjadocker/yamdb_image:latest
+        with:
+          context: ./api_yamdb
+          pull: true
+          push: true
+          tags: tanjadocker/yamdb_image:latest
   
   deploy:
     runs-on: ubuntu-latest
