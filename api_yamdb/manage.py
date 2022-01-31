@@ -1,4 +1,3 @@
-# this is a test comment to check if the code is updated after the workflow
 # !/usr/bin/env python
 """Django's command-line utility for administrative tasks."""
 import os
