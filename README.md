@@ -1,5 +1,5 @@
-# API для YaMDb (+ инфраструктура)
-## Блок Docker. Контейнеризация на удалённом сервере (спринт 13)
+# Docker YamDB Remote
+## Docker. Контейнеризация проекта YaMDb на удалённом сервере
 
 ![example workflow](https://github.com/tanja-ovc/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)
 
