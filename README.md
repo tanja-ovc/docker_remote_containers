@@ -1,6 +1,6 @@
 # Docker YaMDB Remote
 
-### Проект YamDB с инфраструктурой для контейнеризации на удалённом сервере
+### Проект YamDB с инфраструктурой для деплоя на удалённом сервере
 (версия без инфраструктуры: https://github.com/tanja-ovc/api_yamdb_group_project)
 
 ![example workflow](https://github.com/tanja-ovc/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)
