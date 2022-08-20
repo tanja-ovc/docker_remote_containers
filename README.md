@@ -5,7 +5,7 @@
 
 ![example workflow](https://github.com/tanja-ovc/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)
 
-- Данный проект посвящен созданию инфраструктуры для контейнеризации __на удалённом сервере__ уже существующего проекта YaMDB (https://github.com/tanja-ovc/api_yamdb_group_project).
+- Данный проект посвящен созданию инфраструктуры для деплоя __на удалённом сервере__ уже существующего проекта YaMDB (https://github.com/tanja-ovc/api_yamdb_group_project).
 
 Проект на данный момент развёрнут на сервере 51.250.12.20.
 
